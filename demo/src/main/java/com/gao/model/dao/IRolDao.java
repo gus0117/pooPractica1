@@ -1,5 +1,7 @@
 package com.gao.model.dao;
 
-public interface IRolDao {
+import com.gao.model.entities.Rol;
 
+public interface IRolDao extends IGenericDao<Rol, Integer>{
+	
 }
