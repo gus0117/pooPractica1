@@ -1,5 +1,8 @@
 package com.gao.model.dao.imp;
 
+import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
@@ -30,23 +33,20 @@ public class GenericDaoImp<T,ID> implements IGenericDao<T, ID>{
 		getSession().getTransaction().commit();
 		
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<T> getAll(Class<T> type) {
+		Session session = getSessionFactory().getCurrentSession();
+		Criteria criteria = session.createCriteria(type);
+		return criteria.list();
+	}
 
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-
 	public Session getSession() {
 		return session;
 	}
-
-	public void setSession(Session session) {
-		this.session = session;
-	}
-	
-	
 
 }

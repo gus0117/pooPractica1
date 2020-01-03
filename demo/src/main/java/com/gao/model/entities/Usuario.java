@@ -1,14 +1,46 @@
 package com.gao.model.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import com.gao.enums.EstadoUsuario;
 
+@Entity
+@Table(name = "usuarios")
 public class Usuario {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
 	private Integer id;
+	
+	@Column(name = "user")
 	private String usuario;
+	
+	@Column
 	private String password;
+	
+	@Column(name = "nombre_apellido")
 	private String nombreApellido;
+	
+	@Column(name = "e_mail")
 	private String eMail;
+	
+	@Column
+	@Enumerated(EnumType.STRING)
 	private EstadoUsuario estado;
+	
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@JoinColumn(name="rol_id", nullable=false)
 	private Rol rol;
 	
 	public Usuario() {
